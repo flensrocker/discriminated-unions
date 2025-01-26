@@ -280,6 +280,17 @@ type DynFormGroup = Readonly<{
 Let's try our example definitions of our `nameField` and `addressKindField` from above.
 
 ```ts
+const addressKindField: DynFormField = {
+  type: "DROPDOWN",
+  key: "addressKind",
+  label: "Kind of address",
+};
+// Type '{ type: "DROPDOWN"; key: string; label: string; }' is not assignable to type 'DynFormField'.
+// Property 'options' is missing in type '{ type: "DROPDOWN"; key: string; label: string; }'
+// but required in type 'Readonly<{ type: "DROPDOWN"; key: string; label: string;
+// options: readonly Readonly<{ label: string; value: unknown; }>[];
+// validators?: Readonly<Partial<{ required: boolean; }>> | undefined; }>'.
+
 const nameField: DynFormField = {
   type: "TEXT",
   key: "name",
@@ -292,15 +303,6 @@ const nameField: DynFormField = {
 // Types of property 'validators' are incompatible.
 // Object literal may only specify known properties,
 // and 'min' does not exist in type 'Readonly<Partial<{ required: boolean; minLength: number; maxLength: number; }>>'.
-
-const addressKindField: DynFormField = {
-  type: "DROPDOWN",
-  key: "addressKind",
-  label: "Kind of address",
-};
-// Type '{ type: "DROPDOWN"; key: string; label: string; }' is not assignable to type 'DynFormField'.
-// Property 'options' is missing in type '{ type: "DROPDOWN"; key: string; label: string; }'
-// but required in type 'Readonly<{ type: "DROPDOWN"; key: string; label: string; options: readonly Readonly<{ label: string; value: unknown; }>[]; validators?: Readonly<Partial<{ required: boolean; }>> | undefined; }>'.
 ```
 
 We have reached our first goal: TypeScript is yelling at us!
