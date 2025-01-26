@@ -332,4 +332,35 @@ And when we define a dropdown field, we need to provide some options.
 >
 > Try to figure out on yourself, what is happening here!
 
+### Third time is a recursion
+
+We missed something from our domain so far.
+A group should not only be able to hold a bunch of fields, but also subgroups (or nested groups).
+As architects we usally avoid circular dependencies or (the bad type of) recursion.
+But some domains in the real world are built upon such concepts.
+Folders can contain files and also folders, which again can contain files and folders and so on.
+Lucky for us TypeScript has no problems with recursive type definitions.
+
+The hardest part is always to find the right name.
+But as an experienced coder, we know what to do: just call it an "item". 🙃
+
+The items of a `DynFormGroup` can be either a `DynFormField` **or** a `DynFormGroup` itself.
+And there it is again: the "or".
+And "or" means "union".
+
+When we want to "unionize" the fields with the group, we have to remember, that we need a discriminator.
+We chose the `type` with a string literal, so we don't really have to think about what to do.
+
+```ts
+type DynFormGroup = Readonly<{
+  type: "GROUP";
+  key: string;
+  items: readonly DynFormItem[];
+}>;
+
+type DynFormItem = DynFormGroup | DynFormField;
+```
+
+It looks like we slowly get used to define DUs (a widely used abbreviation for discriminated unions).
+
 ...TO BE CONTINUED...
