@@ -43,6 +43,7 @@ Back to "Make illegal states unrepresentable".
 
 When we define some "state" (which is "just" some piece of data), we should be guided, which properties on the state must be given,
 which are optional, and what kind of value they should (or must) contain.
+And, of course, what values are not allowed.
 
 As an example, if you want to define a "maxLength" validator on a text input, the maximum length should be a number and not a string or (even worse) a date.
 You can go one step further and say, it should be a positive number.
