@@ -187,7 +187,7 @@ After all they are just names for some numbers, combined in some kind of namespa
 But in "TypeScript land" there're the ones who loves them, and on the other side the ones who hates them.
 And both have valid reasons for their opinion.
 
-In this exmaple the `type` property is used as the discriminator between the different kinds of fields.
+In this example the `type` property is used as the discriminator between the different kinds of fields.
 Oh wait - wasn't that what we wanted to explain further up?
 It's so easy to get distracted.
 But we will get to that in a second! 😂
