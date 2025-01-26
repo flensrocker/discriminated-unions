@@ -1,3 +1,5 @@
+export type NonEmptyArray<T> = readonly [T, ...T[]];
+
 export type DynFormTextField = Readonly<{
   key: string;
   label: string;
@@ -30,7 +32,7 @@ export type DynFormSelectFieldOption = Readonly<{
 export type DynFormSelectField = Readonly<{
   key: string;
   label: string;
-  options: readonly DynFormSelectFieldOption[];
+  options: NonEmptyArray<DynFormSelectFieldOption>;
   validators?: Partial<
     Readonly<{
       required: boolean;
