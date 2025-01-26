@@ -9,6 +9,8 @@ Documentation? Yeah, I will read that later... 😎
 
 The best way would be, if our library would just "explain itself".
 And to achieve that, we can use TypeScript with its rich type system, so that our users are unable to make any mistakes.
+We will utilize TypeScript as some kind of unit test for our code.
+If we define some data, which is not in the shape we need, TypeScript should fail to "test" (aka compile or transpile) our code.
 After all one key concept of domain modeling is:
 
 > Make illegal states unrepresentable.
@@ -317,7 +319,7 @@ And in the second case the `validators` object of a text field doesn't contain a
 And this is, what we want to achieve: make illegal states unrepresentable!
 
 A text field cannot have a `min` value (of course it can if we think about text ranges, but that range won't be defined with numbers!).
-And when we define dropdown field, we need to provide some options.
+And when we define a dropdown field, we need to provide some options.
 
 > Excursion: Technically we can provide an empty array of options.
 > If you don't want that to be allowed, you can also use TypeScript with some selfmade utility type:
