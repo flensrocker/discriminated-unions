@@ -372,4 +372,8 @@ type DynFormItem = DynFormGroup | DynFormField;
 
 It looks like we slowly get used to define DUs (a widely used abbreviation for discriminated unions).
 
+### Intermission for Intersection
+
+**TODO:** composition over inheritance
+
 ...TO BE CONTINUED...
