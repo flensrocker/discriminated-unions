@@ -1,4 +1,4 @@
-# Domain Modeling with Discriminated Unions
+# Domain Modeling with TypeScript
 
 ## Introduction
 
