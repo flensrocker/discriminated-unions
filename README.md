@@ -110,7 +110,7 @@ By the way, an option consists of a label and some value with a type, that's not
 And if we don't know the type, it's `unknown` (don't make me talk about `any`, that's out of the scope of this document 🫣).
 
 And then there are the validators.
-All field types can be required, but only the text fields have a "minLength" and/or "maxLength".
+All field types can be "required", but only the text fields have a "minLength" and/or "maxLength".
 And the number fields can be limited by a "min" and/or "max" value.
 
 ```ts
