@@ -321,6 +321,11 @@ But it is correct - so you better practice to read these kind of error messages.
 
 In the first case it's complaining that it misses the `options` of the dropdown field.
 And in the second case the `validators` object of a text field doesn't contain a `min` property.
+We are told, what we've done wrong, but not neccessarily what we should have done.
+Sometimes the key of understanding the error is at the beginning of the message, sometimes at the end.
+And sometimes right in the middle.
+Or everywhere.
+The main thing is: there is an error, your data does not comply with the needed shape.
 
 And this is, what we want to achieve: make illegal states unrepresentable!
 
