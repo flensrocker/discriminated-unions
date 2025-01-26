@@ -1,6 +1,8 @@
 # Domain Modeling with TypeScript
 
-## Introduction
+**TODO:** table of contents (links to different parts)
+
+## Part 0: Introduction
 
 Let's say we want to write some library, which should be used in multiple applications by different developers.
 Of course it must be well documented, so the other developers never need to reach out to you to explain, how your library should be used.
@@ -19,7 +21,7 @@ So what does that actually mean?
 
 Because everything is easier to understand when some examples are provided, let's first pick a domain.
 
-## The Domain: Dynamic Forms
+### The Domain: Dynamic Forms
 
 ​In this article this will not be a "full featured" dynamic forms module.
 It will be some "minimal valuable product" (MVP) to explain, how we can use the type system and especially discrimintated unions, to make our users happy.
@@ -39,7 +41,7 @@ And be warned: this will not be about design.
 It will look horrible.
 We will focus on the code, not the UI. 🙈
 
-## Core Concepts
+### Core Concepts
 
 Back to "Make illegal states unrepresentable".
 
@@ -63,7 +65,7 @@ If you need to mutate it, nowadays you should be thinking about signals.
 
 So - back to topic!
 
-## What is a Discriminated Union?
+## Part 1: What is a Discriminated Union?
 
 To understand discriminated unions we have to go back to school, when we learned about set theory.
 But don't worry!
@@ -95,7 +97,7 @@ Otherwise we don't know if the operation, we want to do with that object, is all
 
 Let's explore this with our example domain.
 
-## First draft of the types
+### First draft of the types
 
 So let's just sketch some types.
 
@@ -172,7 +174,7 @@ It represents a field for a name, and the name should contain at least three cha
 But we used the wrong validator!
 It must be `minLength` and not `min` - that is only valid for number inputs.
 
-## Second step: be more specific and combine later
+### Second step: be more specific and combine later
 
 Some words about enums.
 
