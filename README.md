@@ -41,6 +41,8 @@ And be warned: this will not be about design.
 It will look horrible.
 We will focus on the code, not the UI. 🙈
 
+At this point I want to shout out a huge "Thank you!" to Bonnie from Tech Stack Nation for introducing me to this domain and encouraging me to implement it by myself!
+
 ### Core Concepts
 
 Back to "Make illegal states unrepresentable".
