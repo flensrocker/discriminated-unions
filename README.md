@@ -30,7 +30,7 @@ Features:
 - Define groups of fields, which should be able to contain subgroups,
 - Groups and fields have a "key", which will be the name of the property in the form's value,
 - Fields have a "label" for display,
-- Create a FormGroup from the data structure,
+- Create a `FormGroup` (`@angular/forms`) from the data structure,
 - Provide a component to visualize the form,
 
 And be warned: this will not be about design.
