@@ -290,7 +290,8 @@ const nameField: DynFormField = {
 };
 // Type '{ type: "TEXT"; key: string; label: string; validators: { min: number; }; }' is not assignable to type 'DynFormField'.
 // Types of property 'validators' are incompatible.
-// Object literal may only specify known properties, and 'min' does not exist in type 'Readonly<Partial<{ required: boolean; minLength: number; maxLength: number; }>>'.
+// Object literal may only specify known properties,
+// and 'min' does not exist in type 'Readonly<Partial<{ required: boolean; minLength: number; maxLength: number; }>>'.
 
 const addressKindField: DynFormField = {
   type: "DROPDOWN",
@@ -298,7 +299,8 @@ const addressKindField: DynFormField = {
   label: "Kind of address",
 };
 // Type '{ type: "DROPDOWN"; key: string; label: string; }' is not assignable to type 'DynFormField'.
-// Property 'options' is missing in type '{ type: "DROPDOWN"; key: string; label: string; }' but required in type 'Readonly<{ type: "DROPDOWN"; key: string; label: string; options: readonly Readonly<{ label: string; value: unknown; }>[]; validators?: Readonly<Partial<{ required: boolean; }>> | undefined; }>'.
+// Property 'options' is missing in type '{ type: "DROPDOWN"; key: string; label: string; }'
+// but required in type 'Readonly<{ type: "DROPDOWN"; key: string; label: string; options: readonly Readonly<{ label: string; value: unknown; }>[]; validators?: Readonly<Partial<{ required: boolean; }>> | undefined; }>'.
 ```
 
 We have reached our first goal: TypeScript is yelling at us!
@@ -322,3 +324,5 @@ And when we define dropdown field, we need to provide some options.
 > `options: NonEmptyArray<DynFormSelectFieldOption>;`
 >
 > Try to figure out on yourself, what is happening here!
+
+...TO BE CONTINUED...
