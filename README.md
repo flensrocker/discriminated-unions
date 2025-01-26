@@ -310,8 +310,8 @@ We have reached our first goal: TypeScript is yelling at us!
 I admit, it doesn't do that in a nice or descriptive way and you really have to squint a bit to get the message.
 But it is correct - so you better practice to read these kind of error messages.
 
-In the first case it's complaining that the `validators` object of a text field doesn't contain a `min` property.
-And in the second case it misses the `options` of the dropdown field.
+In the first case it's complaining that it misses the `options` of the dropdown field.
+And in the second case the `validators` object of a text field doesn't contain a `min` property.
 
 And this is, what we want to achieve: make illegal states unrepresentable!
 
