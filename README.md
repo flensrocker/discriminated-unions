@@ -106,6 +106,8 @@ So let's just sketch some types.
 Every field has some key and label.
 And if it's a dropdown, it must have a list of options.
 But since a text or number field doesn't have options, it must be optional.
+By the way, an option consists of a label and some value with a type, that's not really important for us (remember: MVP).
+And if we don't know the type, it's `unknown` (don't make me talk about `any`, that's out of the scope of this document 🫣).
 
 And then there are the validators.
 All field types can be required, but only the text fields have a "minLength" and/or "maxLength".
