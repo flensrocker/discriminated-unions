@@ -93,7 +93,7 @@ And intersections use the more obvious symbol `&`.
 
 But we're not only talking about "unions", the subject of interest is "discriminated union".
 
-First, in this context the word "discriminated" really means "distinguishable".
+First, in this context the word "discriminated" really means "distinguishable" - and here it's not something bad.
 When we get some object and we know, it's either in set `A` or in set `B`, we need some property on that object, so we can definitely distinguish, in which of the sets it really is.
 Otherwise we don't know if the operation, we want to do with that object, is allowed or not.
 
