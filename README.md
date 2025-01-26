@@ -192,7 +192,7 @@ Oh wait - wasn't that what we wanted to explain further up?
 It's so easy to get distracted.
 But we will get to that in a second! 😂
 
-Another convient way of expressing an "enumeration of values" in TypeScript are "string literal types".
+Another convenient way of expressing an "enumeration of values" in TypeScript is a collection of "string literal types".
 This means, that the actual type behind the values is `string`, but it can't be any string, it has to be some specific string.
 
 ```ts
@@ -204,7 +204,7 @@ type DynFormDropdownFieldType = "DROPDOWN";
 This has two advantages.
 
 First we don't have to remember magic numbers, when we define a field (ignoring the `enum` definition for now).
-And second, when we get some object from an API, which should represent a field, and we log that to the console or inspect on the network tab, we see the value `TEXT` right there.
+And second, when we get some object from an API, which should represent a field, and we log that to the console or inspect on the network tab, we see the value `"TEXT"` right there.
 We don't have to remember the meaning behind the number `0` in our data.
 Hm, only one advantage - we don't have to remember the meaing of magic numbers. 🤷
 
