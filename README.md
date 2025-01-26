@@ -170,7 +170,7 @@ It represents a field for a name, and the name should contain at least three cha
 But we used the wrong validator!
 It must be `minLength` and not `min` - that is only valid for number inputs.
 
-## Second step: be more specific
+## Second step: be more specific and combine later
 
 Some words about enums.
 
