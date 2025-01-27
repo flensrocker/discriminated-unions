@@ -1,6 +1,7 @@
 export type NonEmptyArray<T> = readonly [T, ...T[]];
 
 export type DynFormTextField = Readonly<{
+  type: 'TEXT';
   key: string;
   label: string;
   validators?: Partial<
@@ -13,6 +14,7 @@ export type DynFormTextField = Readonly<{
 }>;
 
 export type DynFormNumberField = Readonly<{
+  type: 'NUMBER';
   key: string;
   label: string;
   validators?: Partial<
@@ -30,6 +32,7 @@ export type DynFormSelectFieldOption = Readonly<{
 }>;
 
 export type DynFormSelectField = Readonly<{
+  type: 'DROPDOWN';
   key: string;
   label: string;
   options: NonEmptyArray<DynFormSelectFieldOption>;
@@ -41,6 +44,7 @@ export type DynFormSelectField = Readonly<{
 }>;
 
 export type DynFormGroup = Readonly<{
+  type: 'GROUP';
   key: string;
   items: readonly DynFormItem[];
 }>;

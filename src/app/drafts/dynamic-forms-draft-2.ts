@@ -1,14 +1,10 @@
-export type DynFormTextFieldType = 'TEXT';
-export type DynFormNumberFieldType = 'NUMBER';
-export type DynFormDropdownFieldType = 'DROPDOWN';
-
 export type DynFormSelectFieldOption = Readonly<{
   label: string;
   value: unknown;
 }>;
 
 export type DynFormTextField = Readonly<{
-  type: DynFormTextFieldType;
+  type: 'TEXT';
   key: string;
   label: string;
   validators?: Readonly<
@@ -21,7 +17,7 @@ export type DynFormTextField = Readonly<{
 }>;
 
 export type DynFormNumberField = Readonly<{
-  type: DynFormNumberFieldType;
+  type: 'NUMBER';
   key: string;
   label: string;
   validators?: Readonly<
@@ -34,7 +30,7 @@ export type DynFormNumberField = Readonly<{
 }>;
 
 export type DynFormDropdownField = Readonly<{
-  type: DynFormDropdownFieldType;
+  type: 'DROPDOWN';
   key: string;
   label: string;
   options: readonly DynFormSelectFieldOption[];

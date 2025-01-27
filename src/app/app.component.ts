@@ -1,20 +1,24 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import type { DynFormItem } from './dynamic-forms';
+import type { DynFormGroup } from './dynamic-forms';
 
-const form: DynFormItem = {
+const exampleForm: DynFormGroup = {
+  type: 'GROUP',
   key: 'address',
   items: [
     {
+      type: 'TEXT',
       key: 'name',
       label: 'Name',
     },
     {
+      type: 'NUMBER',
       key: 'yearOfBirth',
       label: 'Year of birth',
     },
     {
+      type: 'DROPDOWN',
       key: 'kind',
       label: 'Kind',
       options: [
