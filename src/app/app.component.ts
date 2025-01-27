@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { DynFormItem } from './dynamic-forms';
+import type { DynFormItem } from './dynamic-forms';
 
 const form: DynFormItem = {
   key: 'address',
