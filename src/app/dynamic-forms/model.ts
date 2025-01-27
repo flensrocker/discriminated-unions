@@ -1,53 +1,70 @@
 export type NonEmptyArray<T> = readonly [T, ...T[]];
 
-export type DynFormTextField = Readonly<{
-  type: 'TEXT';
-  key: string;
-  label: string;
-  validators?: Partial<
-    Readonly<{
-      required: boolean;
-      minLength: number;
-      maxLength: number;
-    }>
-  >;
+export type WithType<TType extends string> = Readonly<{
+  type: TType;
 }>;
 
-export type DynFormNumberField = Readonly<{
-  type: 'NUMBER';
+export type WithKey = Readonly<{
   key: string;
-  label: string;
-  validators?: Partial<
-    Readonly<{
-      required: boolean;
-      min: number;
-      max: number;
-    }>
-  >;
 }>;
 
-export type DynFormSelectFieldOption = Readonly<{
+export type WithLabel = Readonly<{
   label: string;
-  value: unknown;
 }>;
 
-export type DynFormSelectField = Readonly<{
-  type: 'DROPDOWN';
-  key: string;
-  label: string;
-  options: NonEmptyArray<DynFormSelectFieldOption>;
-  validators?: Partial<
-    Readonly<{
-      required: boolean;
-    }>
-  >;
-}>;
+export type DynFormTextField = Readonly<
+  WithType<'TEXT'> &
+    WithKey &
+    WithLabel & {
+      validators?: Partial<
+        Readonly<{
+          required: boolean;
+          minLength: number;
+          maxLength: number;
+        }>
+      >;
+    }
+>;
 
-export type DynFormGroup = Readonly<{
-  type: 'GROUP';
-  key: string;
-  items: readonly DynFormItem[];
-}>;
+export type DynFormNumberField = Readonly<
+  WithType<'NUMBER'> &
+    WithKey &
+    WithLabel & {
+      validators?: Partial<
+        Readonly<{
+          required: boolean;
+          min: number;
+          max: number;
+        }>
+      >;
+    }
+>;
+
+export type DynFormSelectFieldOption = Readonly<
+  WithLabel & {
+    value: unknown;
+  }
+>;
+
+export type DynFormSelectField = Readonly<
+  WithType<'DROPDOWN'> &
+    WithKey &
+    WithLabel & {
+      options: NonEmptyArray<DynFormSelectFieldOption>;
+      validators?: Partial<
+        Readonly<{
+          required: boolean;
+        }>
+      >;
+    }
+>;
+
+export type DynFormGroup = Readonly<
+  WithType<'GROUP'> &
+    WithKey & {
+      items: readonly DynFormItem[];
+    }
+>;
 
 export type DynFormField =
   | DynFormTextField

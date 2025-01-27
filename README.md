@@ -374,6 +374,83 @@ It looks like we slowly get used to define DUs (a widely used abbreviation for d
 
 ### Intermission for Intersection
 
-**TODO:** composition over inheritance
+Looking at the current state of the types, we see some kind of repetition there.
+We know we need the "type discriminator", which we called `type` and we distinct them by using different string literals as types.
+But we must be careful, because in every type we add to the union, the discriminator must be written in the same way.
+Misspelling `type` with `tpye` may not be obvious at first (but surely will be noticed at some later point), but we can do better.
+
+Maybe you're a practiced OOP developer and the first thing, which comes to mind, is using some base class.
+And in a OOP context that would be totally fine.
+But here we're not really doing OOP (we don't use classes), so we need another way.
+
+We are lucky, there is another concept we can use: **Composition over Inheritance**
+
+Instead of inheriting from various base classes or interfaces, we will define some helper types.
+We will then use them, to plug them all together to get the type we actually want.
+For this we can use **intersections**, the "counterpart" to unions.
+
+We want an object, which has a property called `type` and it should have a string literal as its type.
+That's a perfect usecase for generic type in TypeScript.
+
+```ts
+type WithType<TType extends string> = Readonly<{
+  type: TType;
+}>;
+```
+
+The generic parameter `TType` must be some kind of string (it can be `string` or some literal like `"TEXT"` or even a union of strings).
+That will be used as the type for the property named `type`.
+
+But how do we compose that with, say, the `DynFormGroup`?
+
+Remember: intersection is **and**, so we use `&`.
+
+```ts
+type DynFormGroup = Readonly<
+  WithType<"GROUP"> & {
+    key: string;
+    items: readonly DynFormItem[];
+  }
+>;
+```
+
+If you wonder: it doesn't matter, if you put that `WithType<...> &` inside the `Readonly` or before or after.
+The type will always be the same.
+But if you but it inside, the visualization of the type from the TS compiler will be more readable.
+
+We can apply this also to the different fields.
+We can now be sure, that the discriminator `type` will always have the same name in every type.
+Nice!
+
+All our `DynFormItem`s will also share the `key` property, so we can do something similar.
+Only this time we don't need a generic parameter, because all of them will have the type `string`.
+
+```ts
+type WithKey = Readonly<{
+  key: string;
+}>;
+
+type DynFormGroup = Readonly<
+  WithType<"GROUP"> &
+    WithKey & {
+      items: readonly DynFormItem[];
+    }
+>;
+```
+
+If we want to write a function, which only operates on the key (don't ask, I just make things up as we're going),
+then we can use that type for our arguments.
+We don't care about other properties, only the `key`.
+
+```ts
+function doSomethingWithTheKey(item: WithKey): void {
+  console.log(item.key);
+}
+```
+
+This is what "composition over inheritance" looks like.
+
+We use the "intersection", so all of our types share the same discriminator.
+And when we put all those types into one union, we can be sure, that we can distinguish them by the discriminator.
 
 ...TO BE CONTINUED...
