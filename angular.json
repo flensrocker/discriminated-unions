@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "discriminated-unions": {
+    "domain-modeling-with-typescript": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/discriminated-unions",
+            "outputPath": "dist/domain-modeling-with-typescript",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "discriminated-unions:build:production"
+              "buildTarget": "domain-modeling-with-typescript:build:production"
             },
             "development": {
-              "buildTarget": "discriminated-unions:build:development"
+              "buildTarget": "domain-modeling-with-typescript:build:development"
             }
           },
           "defaultConfiguration": "development"
