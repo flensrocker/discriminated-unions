@@ -3,26 +3,6 @@ import { RouterOutlet } from '@angular/router';
 
 import type { DynFormGroup } from './dynamic-forms';
 
-const myForm: DynFormGroup = {
-  __type__: 'GROUP',
-  key: 'myForm',
-  items: [
-    {
-      __type__: 'TEXT',
-      key: 'name',
-      label: 'Name',
-      validators: {
-        
-      }
-    },
-  ],
-};
-
-
-
-
-
-
 const exampleForm: DynFormGroup = {
   __type__: 'GROUP',
   key: 'profile',
