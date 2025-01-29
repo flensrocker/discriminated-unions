@@ -5,7 +5,7 @@ import type { DynFormGroup } from './dynamic-forms';
 
 const exampleForm: DynFormGroup = {
   type: 'GROUP',
-  key: 'address',
+  key: 'profile',
   items: [
     {
       type: 'TEXT',
@@ -19,16 +19,28 @@ const exampleForm: DynFormGroup = {
     },
     {
       type: 'DROPDOWN',
-      key: 'kind',
-      label: 'Kind',
+      key: 'favouriteEditor',
+      label: 'Favourite Editor',
       options: [
         {
-          label: 'Shipping',
-          value: 'SHIPPING',
+          label: 'vim',
+          value: 'VIM',
         },
         {
-          label: 'Billing',
-          value: 'BILLING',
+          label: 'Emacs',
+          value: 'EMACS',
+        },
+        {
+          label: 'VS Code',
+          value: 'VSCODE',
+        },
+        {
+          label: 'Webstorm',
+          value: 'WEBSTORM',
+        },
+        {
+          label: 'Other',
+          value: 'OTHER',
         },
       ],
     },
