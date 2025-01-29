@@ -491,4 +491,49 @@ export type DynFormTextField = Readonly<
 
 ### Where are we now?
 
+Right now we just created some types.
+But to get how they help us, you have to use them.
+Copy the file [`dynamic-forms-draft-3.ts`](src/app/drafts/dynamic-forms-draft-3.ts) to some of your projects and then try to define a `DynFormGroup`.
+
+Start with declaring a variable of that type and initialize it with an empty object:
+
+```ts
+const myForm: DynFormGroup = {};
+```
+
+After that navigate inside the empty object and let your (TS compatible) editor do its work:
+
+![](README.assets/empty-group.png)
+
+Select the `__type__` and initialize it with `"GROUP"` (you don't really have a choice here).
+Next fill in some `key` and then create the `items` array.
+
+```ts
+const myForm: DynFormGroup = {
+  __type__: "GROUP",
+  key: "myForm",
+  items: [],
+  // Type '[]' is not assignable to type 'NonEmptyArray<DynFormItem>'.
+  //   Source has 0 element(s) but target requires 1.ts(2322)
+};
+```
+
+Yes, I silently change the type of the `items` property to `NonEmptyArray<DynFormItem>` because a group without some fields is useless... 🤷
+
+Add an object to the array, choose different types and look at what your editor is showing.
+
+![](README.assets/empty-item-type-list.png)
+
+Notice how `options` disappears when you select `"TEXT"`.
+
+![](README.assets/text-field-props.png)
+
+And when we want to add some validator, we only get the ones related to a text field.
+
+![](README.assets/text-field-validators.png)
+
+We cannot "represent illegal state" anymore!
+
+We really deserve a break... 😮‍💨😅
+
 ...TO BE CONTINUED...
