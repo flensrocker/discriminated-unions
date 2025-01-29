@@ -405,7 +405,7 @@ type WithType<TType extends string> = Readonly<{
 }>;
 ```
 
-The generic parameter `TType` must be some kind of string (it can be `string` or some literal like `"TEXT"` or even a union of strings).
+The generic parameter `TType` must be some kind of string (it can be `string` or some literal like `"TEXT"` or even a union of string literals).
 That will be used as the type for the property named `__type__`.
 
 But how do we compose that with, say, the `DynFormGroup`?
