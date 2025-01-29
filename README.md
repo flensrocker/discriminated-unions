@@ -114,7 +114,7 @@ All field types can be "required", but only the text fields have a "minLength" a
 And the number fields can be limited by a "min" and/or "max" value.
 
 ```ts
-type DynFormSelectFieldOption = Readonly<{
+type DynFormDropdownOption = Readonly<{
   label: string;
   value: unknown;
 }>;
@@ -129,7 +129,7 @@ type DynFormField = Readonly<{
   __type__: DynFormFieldType;
   key: string;
   label: string;
-  options?: readonly DynFormSelectFieldOption[];
+  options?: readonly DynFormDropdownOption[];
   validators?: Readonly<
     Partial<{
       required: boolean;
@@ -228,7 +228,7 @@ And depending on its value we know, what other properties are available.
 And since we use immutable types we can inline the "magic type strings" in our field types.
 
 ```ts
-type DynFormSelectFieldOption = Readonly<{
+type DynFormDropdownOption = Readonly<{
   label: string;
   value: unknown;
 }>;
@@ -263,7 +263,7 @@ type DynFormDropdownField = Readonly<{
   __type__: "DROPDOWN";
   key: string;
   label: string;
-  options: readonly DynFormSelectFieldOption[];
+  options: readonly DynFormDropdownOption[];
   validators?: Readonly<
     Partial<{
       required: boolean;
@@ -344,7 +344,7 @@ And when we define a dropdown field, we need to provide some options.
 >
 > `type NonEmptyArray<T> = readonly [T, ...T[]];`
 >
-> `options: NonEmptyArray<DynFormSelectFieldOption>;`
+> `options: NonEmptyArray<DynFormDropdownOption>;`
 >
 > Try to figure out on yourself, what is happening here!
 

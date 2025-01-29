@@ -1,4 +1,4 @@
-export type DynFormSelectFieldOption = Readonly<{
+export type DynFormDropdownOption = Readonly<{
   label: string;
   value: unknown;
 }>;
@@ -33,7 +33,7 @@ export type DynFormDropdownField = Readonly<{
   type: 'DROPDOWN';
   key: string;
   label: string;
-  options: readonly DynFormSelectFieldOption[];
+  options: readonly DynFormDropdownOption[];
   validators?: Readonly<
     Partial<{
       required: boolean;

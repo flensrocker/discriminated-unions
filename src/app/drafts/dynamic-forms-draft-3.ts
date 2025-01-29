@@ -60,19 +60,19 @@ export type DynFormNumberField = Readonly<
     }
 >;
 
-export type DynFormSelectFieldOption = Readonly<
+export type DynFormDropdownOption = Readonly<
   WithLabel & {
     /** Use any value you like, it will be passed through to the item's value */
     value: unknown;
   }
 >;
 
-export type DynFormSelectField = Readonly<
+export type DynFormDropdownField = Readonly<
   WithType<'DROPDOWN'> &
     WithKey &
     WithLabel & {
       /** A non empty list of options displayed in the dropdown list */
-      options: NonEmptyArray<DynFormSelectFieldOption>;
+      options: NonEmptyArray<DynFormDropdownOption>;
       /** Define different validation rules for your form item */
       validators?: Partial<Readonly<RequiredValidator>>;
     }
@@ -89,6 +89,6 @@ export type DynFormGroup = Readonly<
 export type DynFormField =
   | DynFormTextField
   | DynFormNumberField
-  | DynFormSelectField;
+  | DynFormDropdownField;
 
 export type DynFormItem = DynFormField | DynFormGroup;
