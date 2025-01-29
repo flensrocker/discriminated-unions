@@ -4,21 +4,50 @@ import { RouterOutlet } from '@angular/router';
 import type { DynFormGroup } from './dynamic-forms';
 
 const exampleForm: DynFormGroup = {
-  type: 'GROUP',
+  __type__: 'GROUP',
   key: 'profile',
   items: [
     {
-      type: 'TEXT',
+      __type__: 'TEXT',
       key: 'name',
       label: 'Name',
+      validators: {
+        required: true,
+      },
     },
     {
-      type: 'NUMBER',
+      __type__: 'GROUP',
+      key: 'address',
+      items: [
+        {
+          __type__: 'TEXT',
+          key: 'street',
+          label: 'Street',
+        },
+        {
+          __type__: 'TEXT',
+          key: 'zipCode',
+          label: 'ZIP Code',
+        },
+        {
+          __type__: 'TEXT',
+          key: 'city',
+          label: 'City',
+        },
+        {
+          __type__: 'TEXT',
+          key: 'country',
+          label: 'Country',
+        },
+      ],
+    },
+    {
+      __type__: 'NUMBER',
       key: 'yearOfBirth',
       label: 'Year of birth',
     },
     {
-      type: 'DROPDOWN',
+      __type__: 'DROPDOWN',
       key: 'favouriteEditor',
       label: 'Favourite Editor',
       options: [

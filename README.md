@@ -126,7 +126,7 @@ const enum DynFormFieldType {
 }
 
 type DynFormField = Readonly<{
-  type: DynFormFieldType;
+  __type__: DynFormFieldType;
   key: string;
   label: string;
   options?: readonly DynFormSelectFieldOption[];
@@ -153,13 +153,13 @@ What's wrong with the following declarations?
 
 ```ts
 const addressKindField: DynFormField = {
-  type: DynFormFieldType.DROPDOWN,
+  __type__: DynFormFieldType.DROPDOWN,
   key: "addressKind",
   label: "Kind of address",
 };
 
 const nameField: DynFormField = {
-  type: DynFormFieldType.TEXT,
+  __type__: DynFormFieldType.TEXT,
   key: "name",
   label: "Name",
   validators: {
@@ -178,6 +178,13 @@ It represents a field for a name, and the name should contain at least three cha
 But we used the wrong validator!
 It must be `minLength` and not `min` - that is only valid for number inputs.
 
+> **Why `__type__` with underscores?**
+>
+> The "type" of the different objects, we will create, is not meant as a "value" property.
+> It will be used to distinguish the different instances.
+> And due to the underscores when using code completion, it will be at the top of the member list.
+> It should be filled in first, to guide our users on the remaining properties, as we will see later.
+
 ### Second step: be more specific and combine later
 
 Some words about enums.
@@ -187,7 +194,7 @@ After all they are just names for some numbers, combined in some kind of namespa
 But in "TypeScript land" there're the ones who loves them, and on the other side the ones who hates them.
 And both have valid reasons for their opinion.
 
-In this example the `type` property is used as the discriminator between the different kinds of fields.
+In this example the `__type__` property is used as the discriminator between the different kinds of fields.
 Oh wait - wasn't that what we wanted to explain further up?
 It's so easy to get distracted.
 But we will get to that in a second! 😂
@@ -213,7 +220,7 @@ But back to our field types.
 We have the "set of text fields", and another "set of number fields" and then a "set of dropdown fields".
 When we build the union of these sets, we get the "set of fields", which contains all the different kinds of fields.
 
-If we want to know what kind of field we actually have after we pick one, we have to look at its "discriminator", which is the `type` property.
+If we want to know what kind of field we actually have after we pick one, we have to look at its "discriminator", which is the `__type__` property.
 It is something, every kind of field provides.
 So we don't run into some kind of danger, if we access this property.
 And depending on its value we know, what other properties are available.
@@ -227,7 +234,7 @@ type DynFormSelectFieldOption = Readonly<{
 }>;
 
 type DynFormTextField = Readonly<{
-  type: "TEXT";
+  __type__: "TEXT";
   key: string;
   label: string;
   validators?: Readonly<
@@ -240,7 +247,7 @@ type DynFormTextField = Readonly<{
 }>;
 
 type DynFormNumberField = Readonly<{
-  type: "NUMBER";
+  __type__: "NUMBER";
   key: string;
   label: string;
   validators?: Readonly<
@@ -253,7 +260,7 @@ type DynFormNumberField = Readonly<{
 }>;
 
 type DynFormDropdownField = Readonly<{
-  type: "DROPDOWN";
+  __type__: "DROPDOWN";
   key: string;
   label: string;
   options: readonly DynFormSelectFieldOption[];
@@ -290,25 +297,25 @@ Let's try our example definitions of our `nameField` and `addressKindField` from
 
 ```ts
 const addressKindField: DynFormField = {
-  type: "DROPDOWN",
+  __type__: "DROPDOWN",
   key: "addressKind",
   label: "Kind of address",
 };
-// Type '{ type: "DROPDOWN"; key: string; label: string; }' is not assignable to type 'DynFormField'.
-// Property 'options' is missing in type '{ type: "DROPDOWN"; key: string; label: string; }'
-// but required in type 'Readonly<{ type: "DROPDOWN"; key: string; label: string;
+// Type '{ __type__: "DROPDOWN"; key: string; label: string; }' is not assignable to type 'DynFormField'.
+// Property 'options' is missing in type '{ __type__: "DROPDOWN"; key: string; label: string; }'
+// but required in type 'Readonly<{ __type__: "DROPDOWN"; key: string; label: string;
 // options: readonly Readonly<{ label: string; value: unknown; }>[];
 // validators?: Readonly<Partial<{ required: boolean; }>> | undefined; }>'.
 
 const nameField: DynFormField = {
-  type: "TEXT",
+  __type__: "TEXT",
   key: "name",
   label: "Name",
   validators: {
     min: 3,
   },
 };
-// Type '{ type: "TEXT"; key: string; label: string; validators: { min: number; }; }' is not assignable to type 'DynFormField'.
+// Type '{ __type__: "TEXT"; key: string; label: string; validators: { min: number; }; }' is not assignable to type 'DynFormField'.
 // Types of property 'validators' are incompatible.
 // Object literal may only specify known properties,
 // and 'min' does not exist in type 'Readonly<Partial<{ required: boolean; minLength: number; maxLength: number; }>>'.
@@ -358,11 +365,11 @@ And there it is again: the "or".
 And "or" means "union".
 
 When we want to "unionize" the fields with the group, we have to remember, that we need a discriminator.
-We chose the `type` with a string literal, so we don't really have to think about what to do.
+We chose the `__type__` with a string literal, so we don't really have to think about what to do.
 
 ```ts
 type DynFormGroup = Readonly<{
-  type: "GROUP";
+  __type__: "GROUP";
   key: string;
   items: readonly DynFormItem[];
 }>;
@@ -375,9 +382,9 @@ It looks like we slowly get used to define DUs (a widely used abbreviation for d
 ### Intermission for Intersection
 
 Looking at the current state of the types, we see some kind of repetition there.
-We know we need the "type discriminator", which we called `type` and we distinct them by using different string literals as types.
+We know we need the "type discriminator", which we called `__type__` and we distinct them by using different string literals as types.
 But we must be careful, because in every type we add to the union, the discriminator must be written in the same way.
-Misspelling `type` with `tpye` may not be obvious at first (but surely will be noticed at some later point), but we can do better.
+Misspelling `__type__` with `__tpye__` may not be obvious at first (but surely will be noticed at some later point), but we can do better.
 
 Maybe you're a practiced OOP developer and the first thing, which comes to mind, is using some base class.
 And in a OOP context that would be totally fine.
@@ -389,17 +396,17 @@ Instead of inheriting from various base classes or interfaces, we will define so
 We will then use them, to plug them all together to get the type we actually want.
 For this we can use **intersections**, the "counterpart" to unions.
 
-We want an object, which has a property called `type` and it should have a string literal as its type.
+We want an object, which has a property called `__type__` and it should have a string literal as its type.
 That's a perfect usecase for generic type in TypeScript.
 
 ```ts
 type WithType<TType extends string> = Readonly<{
-  type: TType;
+  __type__: TType;
 }>;
 ```
 
 The generic parameter `TType` must be some kind of string (it can be `string` or some literal like `"TEXT"` or even a union of strings).
-That will be used as the type for the property named `type`.
+That will be used as the type for the property named `__type__`.
 
 But how do we compose that with, say, the `DynFormGroup`?
 
@@ -419,7 +426,7 @@ The type will always be the same.
 But if you but it inside, the visualization of the type from the TS compiler will be more readable.
 
 We can apply this also to the different fields.
-We can now be sure, that the discriminator `type` will always have the same name in every type.
+We can now be sure, that the discriminator `__type__` will always have the same name in every type.
 Nice!
 
 All our `DynFormItem`s will also share the `key` property, so we can do something similar.
@@ -451,6 +458,37 @@ function doSomethingWithTheKey(item: WithKey): void {
 This is what "composition over inheritance" looks like.
 
 We use the "intersection", so all of our types share the same discriminator.
-And when we put all those types into one union, we can be sure, that we can distinguish them by the discriminator.
+And when we put all those types into one union, we can be sure, we can distinguish them by the discriminator.
+
+And there's one final property, we can extract: `required` inside the validators.
+
+```ts
+type RequiredValidator = Readonly<{
+  required: boolean;
+}>;
+```
+
+As an example, this is how our `DynFormTextField` looks like.
+It's not that pretty, but it has its advantages.
+As always it's a tradeoff.
+
+```ts
+export type DynFormTextField = Readonly<
+  WithType<"TEXT"> &
+    WithKey &
+    WithLabel & {
+      validators?: Partial<
+        Readonly<
+          RequiredValidator & {
+            minLength: number;
+            maxLength: number;
+          }
+        >
+      >;
+    }
+>;
+```
+
+### Where are we now?
 
 ...TO BE CONTINUED...
