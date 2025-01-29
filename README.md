@@ -458,7 +458,7 @@ function doSomethingWithTheKey(item: WithKey): void {
 This is what "composition over inheritance" looks like.
 
 We use the "intersection", so all of our types share the same discriminator.
-And when we put all those types into one union, we can be sure, we can distinguish them by the discriminator.
+And when we put all those types into one union, we can be sure, we can distinguish them by this discriminator.
 
 And there's one final property, we can extract: `required` inside the validators.
 
