@@ -92,3 +92,5 @@ export type DynFormField =
   | DynFormDropdownField;
 
 export type DynFormItem = DynFormField | DynFormGroup;
+
+export type DynFormItemType = DynFormItem['__type__'];

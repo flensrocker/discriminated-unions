@@ -1,72 +1,73 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 import type {
   DynFormDropdownField,
   DynFormGroup,
   DynFormItem,
+  DynFormItemType,
   DynFormNumberField,
   DynFormTextField,
+  WithType,
 } from './model';
 
-const assertNever = (item: never, message: string): void => {
-  console.error(message, item);
-};
+type CreateItemControlFn<TItem extends DynFormItem> = (
+  item: TItem
+) => AbstractControl;
 
-const addTextField = (
-  parentFormGroup: FormGroup,
+type CreateItemControlFnMap = Readonly<{
+  [TType in DynFormItemType]: CreateItemControlFn<
+    Extract<DynFormItem, WithType<TType>>
+  >;
+}>;
+
+const createTextFieldControl: CreateItemControlFn<DynFormTextField> = (
   textField: DynFormTextField
-): void => {
+) => {
   // TODO add validators
   const textControl = new FormControl('', { nonNullable: true });
-  parentFormGroup.addControl(textField.key, textControl);
+  return textControl;
 };
 
-const addNumberField = (
-  parentFormGroup: FormGroup,
+const createNumberFieldControl: CreateItemControlFn<DynFormNumberField> = (
   numberField: DynFormNumberField
-): void => {
+) => {
   // TODO add validators
   const numberControl = new FormControl(0, { nonNullable: true });
-  parentFormGroup.addControl(numberField.key, numberControl);
+  return numberControl;
 };
 
-const addDropdownField = (
-  parentFormGroup: FormGroup,
+const createDropdownFieldControl: CreateItemControlFn<DynFormDropdownField> = (
   dropdownField: DynFormDropdownField
-): void => {
+) => {
   // TODO add validators
   const dropdownControl = new FormControl<unknown>(null);
-  parentFormGroup.addControl(dropdownField.key, dropdownControl);
+  return dropdownControl;
 };
 
-const addGroup = (parentFormGroup: FormGroup, group: DynFormGroup): void => {
+const createGroupControl = (group: DynFormGroup): AbstractControl => {
   const formGroup = new FormGroup({});
   addItems(formGroup, group.items);
-  parentFormGroup.addControl(group.key, formGroup);
+  return formGroup;
+};
+
+const addItemMap: CreateItemControlFnMap = {
+  TEXT: createTextFieldControl,
+  NUMBER: createNumberFieldControl,
+  DROPDOWN: createDropdownFieldControl,
+  GROUP: createGroupControl,
 };
 
 const addItems = (
   parentFormGroup: FormGroup,
   items: readonly DynFormItem[]
-): void => {
+) => {
   items.forEach((item) => {
-    switch (item.__type__) {
-      case 'TEXT':
-        addTextField(parentFormGroup, item);
-        break;
-      case 'NUMBER':
-        addNumberField(parentFormGroup, item);
-        break;
-      case 'DROPDOWN':
-        addDropdownField(parentFormGroup, item);
-        break;
-      case 'GROUP':
-        addGroup(parentFormGroup, item);
-        break;
-      default:
-        assertNever(item, `Unknown item type: ${item}`);
-        break;
-    }
+    const addItemFn = addItemMap[
+      item.__type__
+    ] as CreateItemControlFn<DynFormItem>;
+    const itemControl = addItemFn(item);
+    // TODO or add validators here?
+    parentFormGroup.addControl(item.key, itemControl);
   });
 };
 
