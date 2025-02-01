@@ -438,6 +438,7 @@ After that navigate inside the empty object and let your (TS compatible) editor 
 
 Select the `__type__` and initialize it with `"GROUP"` (you don't really have a choice here).
 Next fill in some `key` and then create the `items` array.
+The key of the root `DynFormGroup` is not that important, because it won't be used in some parent control.
 
 ```ts
 const myForm: DynFormGroup = {
@@ -465,4 +466,8 @@ And when we want to add some validator, we only get the ones related to a text f
 
 We cannot "represent illegal state" anymore!
 
-We really deserve a break... 😮‍💨😅
+That was a lot!
+Take a deep breath and play around with the types.
+Experiment with them, to get used to it.
+
+And don't forget to take a break... 😮‍💨😅
