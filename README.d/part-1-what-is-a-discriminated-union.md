@@ -424,7 +424,7 @@ export type DynFormTextField = Readonly<
 
 Right now we just created some types.
 But to get how they help us, you have to use them.
-Copy the file [`dynamic-forms-draft-3.ts`](src/app/drafts/dynamic-forms-draft-3.ts) to some of your projects and then try to define a `DynFormGroup`.
+Copy the file [`dynamic-forms-draft-3.ts`](../src/app/drafts/dynamic-forms-draft-3.ts) to some of your projects and then try to define a `DynFormGroup`.
 
 Start with declaring a variable of that type and initialize it with an empty object:
 
