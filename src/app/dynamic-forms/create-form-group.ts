@@ -50,7 +50,7 @@ const createGroupControl = (group: DynFormGroup): AbstractControl => {
   return formGroup;
 };
 
-const addItemMap: CreateItemControlFnMap = {
+const createItemControlFnMap: CreateItemControlFnMap = {
   TEXT: createTextFieldControl,
   NUMBER: createNumberFieldControl,
   DROPDOWN: createDropdownFieldControl,
@@ -62,7 +62,7 @@ const addItems = (
   items: readonly DynFormItem[]
 ) => {
   items.forEach((item) => {
-    const addItemFn = addItemMap[
+    const addItemFn = createItemControlFnMap[
       item.__type__
     ] as CreateItemControlFn<DynFormItem>;
     const itemControl = addItemFn(item);
